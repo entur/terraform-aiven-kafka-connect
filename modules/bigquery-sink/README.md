@@ -6,7 +6,7 @@ Terraform module for deploying Google's BigQuery sink connector on an Aiven mana
 
 | Name                                     | Description                                                                 |     Type     |                      Default                       | Required |
 |------------------------------------------|-----------------------------------------------------------------------------|:------------:|:--------------------------------------------------:|:--------:|
-| api_token                                | Aiven API token to be provided by environment variable `TF_VAR_api_token`   |    string    |                        n/a                         |   yes    |
+| api_token                                | Aiven API access token                                                      |    string    |                        n/a                         |   yes    |
 | connector_name                           | Unique name for this connector                                              |    string    |                        n/a                         |   yes    |
 | aiven_project_name                       | Aiven project where KafkaConnect cluster is running                         |    string    |                        n/a                         |   yes    |
 | kafka_service_name                       | Aiven (Kafka)service name where KafkaConnect cluster is running             |    string    |                        n/a                         |   yes    |
@@ -26,12 +26,33 @@ Terraform module for deploying Google's BigQuery sink connector on an Aiven mana
 | key_source_type                          | Key type for Google credentials with access to `bigquery_dataset_name`      |    string    |                       "JSON"                       |    no    |
 | key_converter                            | Converter class for key data on a connect record                            |    string    | "org.apache.kafka.connect.storage.StringConverter" |    no    |
 | value_converter                          | Converter class for value data on a connect record                          |    string    |     "io.confluent.connect.avro.AvroConverter"      |    no    |
+| additional_configuration                 | A map of additional configuration options                                   | map(string)  |                         {}                         |    no    |
 
 [Example](./../../examples/bigquery-sink/main.tf)
 Sample configuration for reference
 
 ## Getting started
 
-- Set an environment variable `TF_VAR_api_token` with Aiven authentication token
-- Make sure that BigQuery project with name pointed by `bigquery_project_name` exists and has a dataset with name `bigquery_dataset_name` exists.
-- Make sure that the service account with id `bigquery_service_account_id` exists in project `bigquery_project_name` and has `roles/bigquery.dataEditor` access on the dataset.
+- `api_token` with Aiven authentication token can be provided as an environment variable with `TF_VAR_` prefix or in
+  a `.tfvars` file, otherwise from Harness Secrets Manager if you are provisioning from Harness.
+- Make sure that BigQuery project with name pointed by `bigquery_project_name` exists and has a dataset with
+  name `bigquery_dataset_name` exists.
+- Make sure that the service account with id `bigquery_service_account_id` exists in project `bigquery_project_name` and
+  has `roles/bigquery.dataEditor` access on the dataset.
+
+## Known issues
+
+- There is a bug in `aiven_service_component` data resource that returns invalid port number for schema registry. Until
+  it is fixed one can use `additional_configuration` a shown below to overwrite correct port number
+
+```terraform
+additional_configuration = {
+  "key.converter.schema.registry.url" : "https://entur-kafka-test-int-ent-sbx.aivencloud.com:23714",
+  "value.converter.schema.registry.url" : "https://entur-kafka-test-int-ent-sbx.aivencloud.com:23714"
+}
+```
+
+## References
+
+- [Aiven's Google BigQuery sink connector](https://docs.aiven.io/docs/products/kafka/kafka-connect/howto/gcp-bigquery-sink)
+- [Git repo for Kafka Connect BigQuery Connector](https://github.com/confluentinc/kafka-connect-bigquery)

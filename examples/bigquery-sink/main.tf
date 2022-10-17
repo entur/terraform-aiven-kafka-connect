@@ -12,4 +12,8 @@ module "bigquery-sink" {
   bigquery_service_account_id = "kcbqs-api"
   kafka_topics                = ["test-topic-staging"]
   connector_name              = "aiven-bq-sink-connector-module-test"
+  additional_configuration    = {
+    "key.converter.schema.registry.url" : "https://entur-kafka-test-int-ent-sbx.aivencloud.com:23714",
+    "value.converter.schema.registry.url" : "https://entur-kafka-test-int-ent-sbx.aivencloud.com:23714"
+  }
 }

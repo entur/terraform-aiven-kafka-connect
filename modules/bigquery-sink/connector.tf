@@ -25,16 +25,10 @@ resource "google_service_account_key" "bq-sa-key" {
 }
 
 locals {
-  schema_registry_url      = "https://${data.aiven_service_component.schema-registry.host}:23714"
+  schema_registry_url      = "https://${data.aiven_service_component.schema-registry.host}:${data.aiven_service_component.schema-registry.port}"
   schema_registry_userinfo = "${data.aiven_kafka_user.kafka_admin.username}:${data.aiven_kafka_user.kafka_admin.password}"
   bq_sa_key                = base64decode(google_service_account_key.bq-sa-key.private_key)
-}
-
-resource "aiven_kafka_connector" "bigquery-sink-connector" {
-  connector_name = var.connector_name
-  project        = data.aiven_project.entur_kafka.project
-  service_name   = var.kafka_service_name
-  config         = {
+  standard_configuration   = {
     "name" : var.connector_name,
     "connector.class" : "com.wepay.kafka.connect.bigquery.BigQuerySinkConnector",
     "sanitizeTopics" : var.sanitize_topics,
@@ -63,4 +57,11 @@ resource "aiven_kafka_connector" "bigquery-sink-connector" {
     "transforms.regexTransformation.replacement" : "$1",
     "transforms.regexTransformation.type" : "org.apache.kafka.connect.transforms.RegexRouter"
   }
+}
+
+resource "aiven_kafka_connector" "bigquery-sink-connector" {
+  connector_name = var.connector_name
+  project        = data.aiven_project.entur_kafka.project
+  service_name   = var.kafka_service_name
+  config         = merge(local.standard_configuration, var.additional_configuration)
 }
