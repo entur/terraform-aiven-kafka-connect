@@ -1,22 +1,33 @@
-variable "aiven_api_token" {
-  type        = string
-  description = "Aiven API token to be provided by environment variable TF_VAR_api_token"
+variable "init" {
+  description = "Entur init module output. https://github.com/entur/terraform-aiven-kafka-connect-init"
+  type = object({
+    aiven = object({
+      project      = string
+      service      = string
+      access_token = string
+    })
+    schema_registry = object({
+      url      = string
+      userinfo = string
+    })
+    default_configuration = map(string)
+  })
 }
 
-variable "aiven_project_name" {
+variable "connector_name" {
   type        = string
-  description = "Aiven project name"
+  description = "Unique name for this connector in the connect cluster"
 }
 
-variable "kafka_service_name" {
+variable "connector_class" {
   type        = string
-  description = "Aiven Kafka service name running Kafka Connect"
+  description = "Name or alias of the class for this connector"
+  default     = "com.wepay.kafka.connect.bigquery.BigQuerySinkConnector"
 }
 
-variable "kafka_admin_username" {
-  type        = string
-  description = "Kafka admin user name for Schema Registry"
-  default     = "avnadmin"
+variable "kafka_topics" {
+  type        = list(string)
+  description = "List of kafka topic names to sink data from"
 }
 
 variable "bigquery_project_name" {
@@ -32,16 +43,6 @@ variable "bigquery_dataset_name" {
 variable "bigquery_service_account_id" {
   type        = string
   description = "Service account id with google credentials in BigQuery project"
-}
-
-variable "kafka_topics" {
-  type        = list(string)
-  description = "List of kafka topic names to sink data from"
-}
-
-variable "connector_name" {
-  type        = string
-  description = "Unique name for this connector"
 }
 
 variable "sanitize_topics" {
@@ -80,12 +81,6 @@ variable "allow_bigquery_required_field_relaxation" {
   default     = true
 }
 
-variable "tasks_max" {
-  type        = number
-  description = "The maximum number of tasks that should be created for this connector. The connector may create fewer tasks if it cannot achieve this level of parallelism"
-  default     = 1
-}
-
 variable "bigquery_retry_count" {
   type        = number
   description = "The number of retry attempts made for a BigQuery request that fails with a backend error or a quota exceeded error"
@@ -96,18 +91,6 @@ variable "key_source_type" {
   type        = string
   description = "Determines whether the keyfile configuration is the path to the credentials JSON file or to the JSON itself. Available values are FILE, JSON & APPLICATION_DEFAULT"
   default     = "JSON"
-}
-
-variable "key_converter" {
-  type        = string
-  description = "Converter class for key Connect data. This controls the format of the data that will be written to Kafka for source connectors or read from Kafka for sink connectors. Popular formats include Avro and JSON"
-  default     = "org.apache.kafka.connect.storage.StringConverter"
-}
-
-variable "value_converter" {
-  type        = string
-  description = "Converter class for value Connect data. This controls the format of the data that will be written to Kafka for source connectors or read from Kafka for sink connectors. Popular formats include Avro and JSON"
-  default     = "io.confluent.connect.avro.AvroConverter"
 }
 
 variable "additional_configuration" {
