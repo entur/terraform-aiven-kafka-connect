@@ -16,7 +16,7 @@ module "bigquery-sink" {
   # This is an example only; if you're adding this block to a live configuration,
   # make sure to use the latest release of the init module, found here:
   # https://github.com/entur/terraform-aiven-kafka-connect-bigquery-sink/releases
-  source                      = "github.com/entur/terraform-aiven-kafka-connect-bigquery-sink//modules/bigquery-sink?ref=v0.1.0"
+  source                      = "github.com/entur/terraform-aiven-kafka-connect-bigquery-sink//modules/bigquery-sink?ref=v0.1.1"
   init                        = module.init
   connector_name              = "my-connector-name"
   bigquery_project_name       = "my-bigquery-project-name"
