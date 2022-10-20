@@ -27,7 +27,7 @@ Key will be destroyed along with the connector.
 
 ```
 module "bigquery-sink" {
-  source = "github.com/entur/terraform-aiven-kafka-connect-bigquery-sink//modules/bigquery-sink?ref=v0.1.0"
+  source = "github.com/entur/terraform-aiven-kafka-connect-bigquery-sink//modules/bigquery-sink?ref=v0.1.1"
   ...
 }
 ```
