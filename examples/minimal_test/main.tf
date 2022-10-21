@@ -10,12 +10,12 @@ module "init" {
   service_name = "my-aiven-kafka-connect-service-name"
 }
 
-# ci: x-release-please-start-version
-
 module "bigquery-sink" {
   # This is for local reference only; if you're using this module as a published
   # module from GitHub, the 'source' parameter must refer to it's public location.
   # See README.md for instructions.
+  # List of elasticsearch-sink module releases can be found here:
+  # https://github.com/entur/terraform-aiven-kafka-connect-bigquery-sink/releases
   #  source                      = "github.com/entur/terraform-aiven-kafka-connect-bigquery-sink//modules/bigquery-sink?ref=vVERSION"
   source                      = "../../modules/bigquery-sink"
   init                        = module.init
@@ -25,6 +25,6 @@ module "bigquery-sink" {
   bigquery_service_account_id = "my-service-account-id"
   kafka_topics                = ["my-topic-1", "my-topic-2"]
   additional_configuration = {
-    "value.converter.schema.registry.url" : "https://my-aiven-resgistry-service-host-name:my-aiven-resgistry-service-port-number"
+    "any.other.config.parameter" : "any-other-config-parameter-value"
   }
 }

@@ -1,8 +1,8 @@
 # Google BigQuery sink connector module
 
 A terraform-module for provisioning Google BigQuery sink connector onto an Aiven managed KafkaConnect cluster.
-This module depends on [Aiven kafka init module](https://github.com/entur/terraform-aiven-kafka-connect-init) to manage
-connectors in Aiven's KafkaConnect clusters
+This module depends on [Aiven kafka init module](https://github.com/entur/terraform-aiven-kafka-connect-init) to access
+basic information about Aiven's KafkaConnect cluster
 
 [Module](modules/bigquery-sink)
 
@@ -16,6 +16,7 @@ Aiven authentication token can be provided as an environment variable with `TF_V
 otherwise from Harness Secrets Manager if you are provisioning from Harness.
 
 ### BigQuery configuration
+
 To be able to sink to a BigQuery project you need a BigQuery project and a dataset created beforehand.
 And you need a service account that has BigQueryEditor access to be able to create tables inside that dataset.
 Each connector will add a key to that service account and provides the key as JSON to the connector for authentication.
@@ -34,14 +35,14 @@ module "bigquery-sink" {
 
 <!-- ci: x-release-please-end -->
 
-See the `README.md` under each module's subfolder for a list of supported inputs and outputs. For examples showing how
-they're implemented, check the [examples](examples) subfolder.
+See the [`README.md`](modules/bigquery-sink/README.md)  under module's subfolder for a list of supported inputs and
+outputs. For examples showing how they're implemented, check the [examples](examples) subfolder.
 
 ### Version constraints
 
 You can control the version of a module dependency by adding `?ref=TAG` at the end of the source argument, as shown in
 the example above. This is highly recommended. You can find a list of available
-versions [here](https://github.com/entur/terraform-google-cloud-storage/releases).
+versions [here](https://github.com/entur/terraform-aiven-kafka-connect-bigquery-sink/releases).
 
 Dependency automation tools such as Renovate Bot will be able to discover new releases and suggest updates
 automatically.

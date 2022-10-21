@@ -16,7 +16,7 @@ locals {
       "connector.class" : var.connector_class,
       "project" : var.bigquery_project_name,
       "defaultDataset" : var.bigquery_dataset_name,
-      "topics" : join(",", var.kafka_topics),
+      "topics" : join(",", toset(var.kafka_topics)),
       "sanitizeTopics" : var.sanitize_topics,
       "autoCreateTables" : var.auto_create_tables,
       "allBQFieldsNullable" : var.all_bigquery_fields_nullable,
