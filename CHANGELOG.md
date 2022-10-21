@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/entur/terraform-aiven-kafka-connect-bigquery-sink/compare/v0.1.1...v0.1.2) (2022-10-21)
+
+
+### Bug Fixes
+
+* minor bug fixes and enhancements to doc ([915f701](https://github.com/entur/terraform-aiven-kafka-connect-bigquery-sink/commit/915f7016a364dcb37bcf0472337bc1a108c0c8e4))
+
 ## [0.1.1](https://github.com/entur/terraform-aiven-kafka-connect-bigquery-sink/compare/v0.1.0...v0.1.1) (2022-10-20)
 
 
