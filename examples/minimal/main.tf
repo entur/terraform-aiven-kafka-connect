@@ -13,7 +13,7 @@ module "init" {
 # ci: x-release-please-start-version
 
 module "bigquery-sink" {
-  source                      = "github.com/entur/terraform-aiven-kafka-connect-bigquery-sink//modules/bigquery-sink?ref=v0.1.1"
+  source                      = "github.com/entur/terraform-aiven-kafka-connect-bigquery-sink//modules/bigquery-sink?ref=v0.1.2"
   init                        = module.init
   connector_name              = "my-connector-name"
   bigquery_project_name       = "my-bigquery-project-name"
