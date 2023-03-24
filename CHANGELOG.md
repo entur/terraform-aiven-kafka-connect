@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/entur/terraform-aiven-kafka-connect-bigquery-sink/compare/v0.1.2...v0.1.3) (2023-03-24)
+
+
+### Bug Fixes
+
+* use complete email address of service account ([4847d52](https://github.com/entur/terraform-aiven-kafka-connect-bigquery-sink/commit/4847d5249cd9b4d322e3f0e381d295ae2ee02f64))
+
 ## [0.1.2](https://github.com/entur/terraform-aiven-kafka-connect-bigquery-sink/compare/v0.1.1...v0.1.2) (2022-10-21)
 
 
