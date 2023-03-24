@@ -1,6 +1,5 @@
 data "google_service_account" "bq-sa" {
-  account_id = var.bigquery_service_account_id
-  project    = var.bigquery_project_name
+  account_id = var.service_account_id
 }
 
 resource "google_service_account_key" "bq-sa-key" {
