@@ -1,7 +1,8 @@
 terraform {
   required_providers {
     aiven = {
-      source = "aiven/aiven"
+      source  = "aiven/aiven"
+      version = ">= 3.0.0, < 4.0.0"
     }
     google = {
       source  = "hashicorp/google"

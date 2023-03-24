@@ -40,9 +40,9 @@ variable "bigquery_dataset_name" {
   description = "BigQuery dataset to sink data to"
 }
 
-variable "bigquery_service_account_id" {
+variable "service_account_id" {
   type        = string
-  description = "Service account id with google credentials in BigQuery project"
+  description = "The email address of the service account with BigQuery Data Editor permission"
 }
 
 variable "sanitize_topics" {

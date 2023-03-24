@@ -6,13 +6,14 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=0.13.2 |
+| <a name="requirement_aiven"></a> [aiven](#requirement\_aiven) | >= 3.0.0, < 4.0.0 |
 | <a name="requirement_google"></a> [google](#requirement\_google) | >=4.40.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aiven"></a> [aiven](#provider\_aiven) | n/a |
+| <a name="provider_aiven"></a> [aiven](#provider\_aiven) | >= 3.0.0, < 4.0.0 |
 | <a name="provider_google"></a> [google](#provider\_google) | >=4.40.0 |
 
 ## Modules
@@ -40,13 +41,13 @@ No modules.
 | <a name="input_bigquery_dataset_name"></a> [bigquery\_dataset\_name](#input\_bigquery\_dataset\_name) | BigQuery dataset to sink data to | `string` | n/a | yes |
 | <a name="input_bigquery_project_name"></a> [bigquery\_project\_name](#input\_bigquery\_project\_name) | BigQuery project id | `string` | n/a | yes |
 | <a name="input_bigquery_retry_count"></a> [bigquery\_retry\_count](#input\_bigquery\_retry\_count) | The number of retry attempts made for a BigQuery request that fails with a backend error or a quota exceeded error | `number` | `1` | no |
-| <a name="input_bigquery_service_account_id"></a> [bigquery\_service\_account\_id](#input\_bigquery\_service\_account\_id) | Service account id with google credentials in BigQuery project | `string` | n/a | yes |
 | <a name="input_connector_class"></a> [connector\_class](#input\_connector\_class) | Name or alias of the class for this connector | `string` | `"com.wepay.kafka.connect.bigquery.BigQuerySinkConnector"` | no |
 | <a name="input_connector_name"></a> [connector\_name](#input\_connector\_name) | Unique name for this connector in the connect cluster | `string` | n/a | yes |
 | <a name="input_init"></a> [init](#input\_init) | Entur init module output. https://github.com/entur/terraform-aiven-kafka-connect-init | <pre>object({<br>    aiven = object({<br>      project      = string<br>      service      = string<br>      access_token = string<br>    })<br>    schema_registry = object({<br>      url      = string<br>      userinfo = string<br>    })<br>    default_configuration = map(string)<br>  })</pre> | n/a | yes |
 | <a name="input_kafka_topics"></a> [kafka\_topics](#input\_kafka\_topics) | List of kafka topic names to sink data from | `list(string)` | n/a | yes |
 | <a name="input_key_source_type"></a> [key\_source\_type](#input\_key\_source\_type) | Determines whether the keyfile configuration is the path to the credentials JSON file or to the JSON itself. Available values are FILE, JSON & APPLICATION\_DEFAULT | `string` | `"JSON"` | no |
 | <a name="input_sanitize_topics"></a> [sanitize\_topics](#input\_sanitize\_topics) | Designates whether to automatically sanitize topic names before using them as table names. If not enabled, topic names are used as table names | `bool` | `true` | no |
+| <a name="input_service_account_id"></a> [service\_account\_id](#input\_service\_account\_id) | The email address of the service account with BigQuery Data Editor permission | `string` | n/a | yes |
 
 ## Outputs
 
