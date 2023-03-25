@@ -2,13 +2,10 @@ variable "init" {
   description = "Entur init module output. https://github.com/entur/terraform-aiven-kafka-connect-init"
   type = object({
     aiven = object({
-      project      = string
-      service      = string
-      access_token = string
-    })
-    schema_registry = object({
-      url      = string
-      userinfo = string
+      access_token        = string
+      project             = string
+      service             = string
+      schema_registry_url = string
     })
     default_configuration = map(string)
   })
@@ -23,6 +20,11 @@ variable "connector_class" {
   type        = string
   description = "Name or alias of the class for this connector"
   default     = "com.wepay.kafka.connect.bigquery.BigQuerySinkConnector"
+}
+
+variable "kafka_username" {
+  description = "Aiven service registry username to connect to Kafka schema registry"
+  type        = string
 }
 
 variable "kafka_topics" {
@@ -43,6 +45,7 @@ variable "bigquery_dataset_name" {
 variable "service_account_id" {
   type        = string
   description = "The email address of the service account with BigQuery Data Editor permission"
+  default     = null
 }
 
 variable "sanitize_topics" {
@@ -91,6 +94,16 @@ variable "key_source_type" {
   type        = string
   description = "Determines whether the keyfile configuration is the path to the credentials JSON file or to the JSON itself. Available values are FILE, JSON & APPLICATION_DEFAULT"
   default     = "JSON"
+}
+
+variable "key_file" {
+  type        = string
+  description = "The file containing a JSON key with BigQuery service account credentials"
+  default     = ""
+  validation {
+    condition     = var.key_file != null
+    error_message = "Service Account Key file cannot be null."
+  }
 }
 
 variable "additional_configuration" {

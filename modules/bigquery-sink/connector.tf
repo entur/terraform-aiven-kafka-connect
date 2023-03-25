@@ -1,13 +1,21 @@
 data "google_service_account" "bq-sa" {
+  count      = var.service_account_id == null ? 0 : 1
   account_id = var.service_account_id
 }
 
 resource "google_service_account_key" "bq-sa-key" {
-  service_account_id = data.google_service_account.bq-sa.name
+  count              = var.service_account_id == null ? 0 : 1
+  service_account_id = data.google_service_account.bq-sa[count.index].name
+}
+
+data "aiven_kafka_user" "kafka_user" {
+  project      = var.init.aiven.project
+  service_name = var.init.aiven.service
+  username     = var.kafka_username
 }
 
 locals {
-  bq_sa_key = base64decode(google_service_account_key.bq-sa-key.private_key)
+  bq_sa_key = var.service_account_id == null ? var.key_file : base64decode(google_service_account_key.bq-sa-key[0].private_key)
   standard_configuration = merge(
     var.init.default_configuration,
     {
@@ -28,7 +36,8 @@ locals {
       "transforms" : "regexTransformation",
       "transforms.regexTransformation.regex" : "(.*)",
       "transforms.regexTransformation.replacement" : "$1",
-      "transforms.regexTransformation.type" : "org.apache.kafka.connect.transforms.RegexRouter"
+      "transforms.regexTransformation.type" : "org.apache.kafka.connect.transforms.RegexRouter",
+      "value.converter.schema.registry.basic.auth.user.info" : "${data.aiven_kafka_user.kafka_user.username}:${data.aiven_kafka_user.kafka_user.password}"
     }
   )
 }

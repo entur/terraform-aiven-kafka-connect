@@ -26,6 +26,7 @@ No modules.
 |------|------|
 | [aiven_kafka_connector.bigquery-sink-connector](https://registry.terraform.io/providers/aiven/aiven/latest/docs/resources/kafka_connector) | resource |
 | [google_service_account_key.bq-sa-key](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_account_key) | resource |
+| [aiven_kafka_user.kafka_user](https://registry.terraform.io/providers/aiven/aiven/latest/docs/data-sources/kafka_user) | data source |
 | [google_service_account.bq-sa](https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/service_account) | data source |
 
 ## Inputs
@@ -43,11 +44,13 @@ No modules.
 | <a name="input_bigquery_retry_count"></a> [bigquery\_retry\_count](#input\_bigquery\_retry\_count) | The number of retry attempts made for a BigQuery request that fails with a backend error or a quota exceeded error | `number` | `1` | no |
 | <a name="input_connector_class"></a> [connector\_class](#input\_connector\_class) | Name or alias of the class for this connector | `string` | `"com.wepay.kafka.connect.bigquery.BigQuerySinkConnector"` | no |
 | <a name="input_connector_name"></a> [connector\_name](#input\_connector\_name) | Unique name for this connector in the connect cluster | `string` | n/a | yes |
-| <a name="input_init"></a> [init](#input\_init) | Entur init module output. https://github.com/entur/terraform-aiven-kafka-connect-init | <pre>object({<br>    aiven = object({<br>      project      = string<br>      service      = string<br>      access_token = string<br>    })<br>    schema_registry = object({<br>      url      = string<br>      userinfo = string<br>    })<br>    default_configuration = map(string)<br>  })</pre> | n/a | yes |
+| <a name="input_init"></a> [init](#input\_init) | Entur init module output. https://github.com/entur/terraform-aiven-kafka-connect-init | <pre>object({<br>    aiven = object({<br>      access_token        = string<br>      project             = string<br>      service             = string<br>      schema_registry_url = string<br>    })<br>    default_configuration = map(string)<br>  })</pre> | n/a | yes |
 | <a name="input_kafka_topics"></a> [kafka\_topics](#input\_kafka\_topics) | List of kafka topic names to sink data from | `list(string)` | n/a | yes |
+| <a name="input_kafka_username"></a> [kafka\_username](#input\_kafka\_username) | Aiven service registry username to connect to Kafka schema registry | `string` | n/a | yes |
+| <a name="input_key_file"></a> [key\_file](#input\_key\_file) | The file containing a JSON key with BigQuery service account credentials | `string` | `""` | no |
 | <a name="input_key_source_type"></a> [key\_source\_type](#input\_key\_source\_type) | Determines whether the keyfile configuration is the path to the credentials JSON file or to the JSON itself. Available values are FILE, JSON & APPLICATION\_DEFAULT | `string` | `"JSON"` | no |
 | <a name="input_sanitize_topics"></a> [sanitize\_topics](#input\_sanitize\_topics) | Designates whether to automatically sanitize topic names before using them as table names. If not enabled, topic names are used as table names | `bool` | `true` | no |
-| <a name="input_service_account_id"></a> [service\_account\_id](#input\_service\_account\_id) | The email address of the service account with BigQuery Data Editor permission | `string` | n/a | yes |
+| <a name="input_service_account_id"></a> [service\_account\_id](#input\_service\_account\_id) | The email address of the service account with BigQuery Data Editor permission | `string` | `null` | no |
 
 ## Outputs
 

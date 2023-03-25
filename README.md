@@ -19,8 +19,12 @@ otherwise from Harness Secrets Manager if you are provisioning from Harness.
 
 To be able to sink to a BigQuery project you need a BigQuery project and a dataset created beforehand.
 And you need a service account that has BigQueryEditor access to be able to create tables inside that dataset.
-Each connector will add a key to that service account and provides the key as JSON to the connector for authentication.
-Key will be destroyed along with the connector.
+
+1. When `service_account_id` is provided, each connector will add a key to that service account and provides the key as
+   JSON to the connector for authentication. Key will be destroyed along with the connector.
+2. When `key_file` is provided, connector will not create any new key but will use the provided one here
+3. When both are provided option 1 will be applied
+4. When none are provided connector does not sink any data
 
 <!-- ci: x-release-please-start-version -->
 
