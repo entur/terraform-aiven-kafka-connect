@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/entur/terraform-aiven-kafka-connect-bigquery-sink/compare/v0.1.3...v0.2.0) (2023-03-25)
+
+
+### Features
+
+* Option to use either SA key from module input or create based on SA id. Kafka user configuration is now part of sink module. ([e7ea48c](https://github.com/entur/terraform-aiven-kafka-connect-bigquery-sink/commit/e7ea48c4f5e110512ad61d085cc3eed9093dda8f))
+
 ## [0.1.3](https://github.com/entur/terraform-aiven-kafka-connect-bigquery-sink/compare/v0.1.2...v0.1.3) (2023-03-24)
 
 
