@@ -32,7 +32,7 @@ And you need a service account that has BigQueryEditor access to be able to crea
 
 ```
 module "bigquery-sink" {
-  source = "github.com/entur/terraform-aiven-kafka-connect-bigquery-sink//modules/bigquery-sink?ref=v0.2.0"
+  source = "github.com/entur/terraform-aiven-kafka-connect-bigquery-sink//modules/bigquery-sink?ref=v0.2.1"
   ...
 }
 ```
