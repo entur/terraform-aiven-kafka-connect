@@ -2,10 +2,11 @@ variable "init" {
   description = "Entur init module output. https://github.com/entur/terraform-aiven-kafka-connect-init"
   type = object({
     aiven = object({
-      access_token        = string
-      project             = string
-      service             = string
-      schema_registry_url = string
+      access_token         = string
+      project              = string
+      kafka_service_name   = string
+      connect_service_name = string
+      schema_registry_url  = string
     })
     default_configuration = map(string)
   })

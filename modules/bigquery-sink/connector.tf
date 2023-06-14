@@ -10,7 +10,7 @@ resource "google_service_account_key" "bq-sa-key" {
 
 data "aiven_kafka_user" "kafka_user" {
   project      = var.init.aiven.project
-  service_name = var.init.aiven.service
+  service_name = var.init.aiven.kafka_service_name
   username     = var.kafka_username
 }
 
@@ -45,6 +45,6 @@ locals {
 resource "aiven_kafka_connector" "bigquery-sink-connector" {
   connector_name = var.connector_name
   project        = var.init.aiven.project
-  service_name   = var.init.aiven.service
+  service_name   = var.init.aiven.connect_service_name
   config         = merge(local.standard_configuration, var.additional_configuration)
 }
