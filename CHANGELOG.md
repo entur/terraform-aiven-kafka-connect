@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.2](https://github.com/entur/terraform-aiven-kafka-connect-bigquery-sink/compare/v0.2.1...v0.2.2) (2023-10-03)
+
+
+### Bug Fixes
+
+* add .checkov.yaml ignore file ([956f4f3](https://github.com/entur/terraform-aiven-kafka-connect-bigquery-sink/commit/956f4f37b5b9363a2ffa35a3abcc388e4837c68b))
+* ignore results.sarif ([c761821](https://github.com/entur/terraform-aiven-kafka-connect-bigquery-sink/commit/c761821b2e8115fe5ce8d91985574bc95eb23ff8))
+
 ## [0.2.1](https://github.com/entur/terraform-aiven-kafka-connect-bigquery-sink/compare/v0.2.0...v0.2.1) (2023-06-14)
 
 
